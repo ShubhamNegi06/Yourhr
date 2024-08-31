@@ -1,4 +1,3 @@
-// routes/userRoutes.js
 const express = require('express');
 const router = express.Router();
 const { body, validationResult } = require('express-validator');
@@ -48,7 +47,11 @@ router.post(
         zip,
         phone,
         altPhone,
-        file: req.file ? req.file.path : '', // Save the file path
+        file: req.file ? {
+          filename: req.file.originalname,
+          contentType: req.file.mimetype,
+          data: req.file.buffer
+        } : null, // Save the file buffer to the database
         agreedToTerms
       });
 
@@ -101,5 +104,16 @@ router.post(
     }
   }
 );
+
+// app.get('/file/:id', async (req, res) => {
+//   try {
+//     const file = await File.findById(req.params.id);
+//     res.contentType(file.contentType);
+//     res.send(file.data);
+//   } catch (error) {
+//     console.error('Error:', error);
+//     res.status(404).send('File not found');
+//   }
+// });
 
 module.exports = router;

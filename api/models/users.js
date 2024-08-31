@@ -12,7 +12,11 @@ const userSchema = new mongoose.Schema({
   zip: { type: Number },
   phone: { type: Number, required: true },
   altPhone: { type: String },
-  file: { type: String }, // File path or URL
+  file: {
+    filename: String,
+    contentType: String,
+    data: Buffer
+  },
   agreedToTerms: { type: Boolean, default: false }
 });
 

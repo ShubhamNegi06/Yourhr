@@ -11,7 +11,7 @@ const JobSearch = () => {
 
   useEffect(() => {
     const fetchJobs = async () => {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/jobs`);
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}jobs`);
       const data = await response.json();
   
       // Remove duplicates based on job id

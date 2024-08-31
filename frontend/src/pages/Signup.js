@@ -33,9 +33,9 @@ const SignupPage = () => {
     Object.keys(formData).forEach(key => {
       data.append(key, formData[key]);
     });
-
+    const url = `${process.env.REACT_APP_BACKEND_URL}users/signup`
     try {
-      const response = await fetch('/api/users', {
+      const response = await fetch(url, {
         method: 'POST',
         body: data,
       });
