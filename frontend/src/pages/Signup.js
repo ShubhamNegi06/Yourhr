@@ -118,7 +118,7 @@ const SignupPage = () => {
         </div>
         <div className="col-12">
           <div className="form-check">
-            <input className="form-check-input" type="checkbox" id="agreedToTerms" onChange={handleChange} />
+            <input className="form-check-input" type="checkbox" id="agreedToTerms" required onChange={handleChange} />
             <label className="form-check-label" htmlFor="agreedToTerms">
               Agree to terms and conditions
             </label>
