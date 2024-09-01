@@ -8,7 +8,6 @@ const SignupPage = () => {
     email: "",
     password: "",
     address: "",
-    address2: "",
     city: "",
     state: "",
     zip: "",
