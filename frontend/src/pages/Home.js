@@ -1,21 +1,32 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../components/AuthContext"; // Adjust the path as needed
 
 const buttonStyle = {
   borderRadius: "5px",
   padding: "10px",
   backgroundColor: "blue"
 };
-const  linkStyle = {
-  textDecoration: "none",
-  color: "white",
-};
+
+// const linkStyle = {
+//   textDecoration: "none",
+//   color: "white",
+// };
 
 const HomePage = () => {
   const navigate = useNavigate();
-const handlesubmit = () =>  { navigate("/JobSearch")};
+  const { isLoggedIn } = useAuth(); // Use the authentication context
+
+  const handleApplyNowClick = () => {
+    if (isLoggedIn) {
+      navigate("/applynow");
+    } else {
+      navigate("/login");
+    }
+  };
+
   return (
     <div>
       {/* Hero Section */}
@@ -34,14 +45,14 @@ const handlesubmit = () =>  { navigate("/JobSearch")};
               <div className="card">
                 <div className="card-body">
                   <h5 className="card-title">Job Search</h5>
-                  <form onSubmit={handlesubmit}>
+                  <form onSubmit={(e) => { e.preventDefault(); navigate("/JobSearch"); }}>
                     <div className="row">
                       <div className="col-md-6 mb-3">
                         <input
                           type="text"
                           className="form-control"
                           placeholder="Job Title or Keywords"
-                          required="true"
+                          required
                         />
                       </div>
                       <div className="col-md-6 mb-3">
@@ -49,7 +60,7 @@ const handlesubmit = () =>  { navigate("/JobSearch")};
                           type="text"
                           className="form-control"
                           placeholder="Location"
-                          required="true"
+                          required
                         />
                       </div>
                     </div>
@@ -77,7 +88,9 @@ const handlesubmit = () =>  { navigate("/JobSearch")};
                 <div className="card-body">
                   <h5 className="card-title">Software Engineer</h5>
                   <p className="card-text">Tech Company - San Francisco, CA</p>
-                  <botton className= "btn btn-outline-light ms-2" style={buttonStyle}><Link to={"/applynow"} style={linkStyle}>Apply Now</Link></botton>
+                  <button className="btn btn-outline-light ms-2" style={buttonStyle} onClick={handleApplyNowClick}>
+                    Apply Now
+                  </button>
                 </div>
               </div>
             </div>
@@ -86,7 +99,9 @@ const handlesubmit = () =>  { navigate("/JobSearch")};
                 <div className="card-body">
                   <h5 className="card-title">Data Analyst</h5>
                   <p className="card-text">Finance Corp - New York, NY</p>
-                  <botton className= "btn btn-outline-light ms-2" style={buttonStyle}><Link to={"/applynow"} style={linkStyle}>Apply Now</Link></botton>
+                  <button className="btn btn-outline-light ms-2" style={buttonStyle} onClick={handleApplyNowClick}>
+                    Apply Now
+                  </button>
                 </div>
               </div>
             </div>
@@ -95,14 +110,15 @@ const handlesubmit = () =>  { navigate("/JobSearch")};
                 <div className="card-body">
                   <h5 className="card-title">UX Designer</h5>
                   <p className="card-text">Creative Agency - Austin, TX</p>
-                  <botton className= "btn btn-outline-light ms-2" style={buttonStyle}><Link to={"/applynow"} style={linkStyle}>Apply Now</Link></botton>
+                  <button className="btn btn-outline-light ms-2" style={buttonStyle} onClick={handleApplyNowClick}>
+                    Apply Now
+                  </button>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </section>
-
     </div>
   );
 };
