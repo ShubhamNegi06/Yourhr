@@ -2,15 +2,18 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from '../components/AuthContext';
 
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { login } = useAuth(); // Get the login function from context
 
   const handlesubmit = async (event) => {
     event.preventDefault(); // Prevent the default form submission
-    const url = `${process.env.REACT_APP_BACKEND_URL}users/login`
+    const url = `${process.env.REACT_APP_BACKEND_URL}users/login`; // URL for login API
+
     try {
       const response = await fetch(url, {
         method: "POST",
@@ -24,8 +27,8 @@ const Login = () => {
 
       if (response.ok) {
         // Handle successful login
-        // e.g., store token, redirect to homepage, etc.
-        navigate("/");
+        login(); // Update login state in context
+        navigate("/"); // Redirect to homepage or any other page
       } else {
         // Handle error (e.g., show error message)
         console.error("Login failed:", data.message);
@@ -76,7 +79,7 @@ const Login = () => {
                   </button>
                 </form>
                 <div className="text-center mt-3">
-                  <p className="mb-0">Don't have an account? <a href="/frontend/src/pages/Signup.js" className="text-primary">Sign Up</a></p>
+                  <p className="mb-0">Don't have an account? <a href="/signup" className="text-primary">Sign Up</a></p>
                 </div>
               </div>
             </div>

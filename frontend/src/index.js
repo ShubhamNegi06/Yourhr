@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Outlet, RouterProvider, createBrowserRouter,} from  'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { AuthProvider } from './components/AuthContext';
 import Signup from './pages/Signup';
 import  Login from './pages/Login';
 import Home from './pages/Home';
@@ -37,5 +38,9 @@ const Approuter = createBrowserRouter([
 ]},
 ]);
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<RouterProvider router={Approuter} />);
+root.render(
+  <AuthProvider>
+<RouterProvider router={Approuter} />
+</AuthProvider>
+);
 
