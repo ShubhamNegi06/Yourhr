@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 const SignupPage = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
     address: "",
@@ -12,59 +14,87 @@ const SignupPage = () => {
     state: "",
     zip: "",
     phone: "",
-    altPhone: "",
     file: null,
-    agreedToTerms: false
+    agreedToTerms: false,
   });
+  const [error, setError] = useState(null); // Corrected: Now `error` is destructured properly
 
   const handleChange = (e) => {
     const { id, value, type, checked, files } = e.target;
     setFormData({
       ...formData,
-      [id]: type === 'checkbox' ? checked : type === 'file' ? files[0] : value
+      [id]: type === "checkbox" ? checked : type === "file" ? files[0] : value,
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Basic validation
+    if (
+      !formData.firstName ||
+      !formData.lastName ||
+      !formData.email ||
+      !formData.password ||
+      !formData.address ||
+      !formData.phone ||
+      !formData.city ||
+      !formData.state ||
+      !formData.zip
+    ) {
+      setError("Please fill in all required fields.");
+      return;
+    }
+
+    if (!formData.agreedToTerms) {
+      setError("Please agree to the terms and conditions.");
+      return;
+    }
+
+    if (!formData.file) {
+      setError("Please upload a file.");
+      return;
+    }
+
     const data = new FormData();
-    Object.keys(formData).forEach(key => {
+    Object.keys(formData).forEach((key) => {
       data.append(key, formData[key]);
     });
-    const url = `${process.env.REACT_APP_BACKEND_URL}users/signup`
+
+    const url = `${process.env.REACT_APP_BACKEND_URL}users/signup`;
     try {
       const response = await fetch(url, {
-        method: 'POST',
+        method: "POST",
         body: data,
       });
 
       if (response.ok) {
         navigate("/Login");
       } else {
-        console.error('Signup failed');
+        const errorData = await response.json();
+        setError(errorData.message || "An error occurred. Please try again.");
       }
     } catch (error) {
-      console.error('Error:', error);
+      setError("An error occurred. Please try again.");
     }
   };
 
   return (
-    
     <div className="container my-5">
       <h2 className="mb-4">Sign Up</h2>
+      {error && <div className="alert alert-danger">{error}</div>} {/* Display error message */}
       <form className="row g-3" onSubmit={handleSubmit}>
-      <div className="col-md-6 col-sm-12">
-          <label htmlFor="First Name" className="form-label">
+        <div className="col-md-6 col-sm-12">
+          <label htmlFor="firstName" className="form-label">
             First Name
           </label>
-          <input className="form-control" id="email" required onChange={handleChange} />
+          <input className="form-control" id="firstName" required onChange={handleChange} />
         </div>
         <div className="col-md-6 col-sm-12">
-          <label htmlFor="Last Name" className="form-label">
+          <label htmlFor="lastName" className="form-label">
             Last Name
           </label>
-          <input className="form-control" id="email" required onChange={handleChange} />
+          <input className="form-control" id="lastName" required onChange={handleChange} />
         </div>
         <div className="col-md-6 col-sm-12">
           <label htmlFor="email" className="form-label">
@@ -135,5 +165,3 @@ const SignupPage = () => {
 };
 
 export default SignupPage;
-
-

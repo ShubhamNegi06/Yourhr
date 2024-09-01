@@ -3,19 +3,19 @@ const mongoose = require('mongoose');
 
 // Define the User schema
 const userSchema = new mongoose.Schema({
-  firstName: {String,  required: true},
-  lastName: {String,   required: true},
+  firstName: {type: String,  required: true},
+  lastName: {type: String,   required: true},
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   address: { type: String, required: true },
   city: { type: String, required: true },
   state: { type: String, required: true },
   zip: { type: Number },
-  phone: { type: Number, required: true, unique:  true },
+  phone: { type: Number, required: true, unique: true },
   file: {
     filename: String,
     contentType: String,
-    data: Buffer
+    data: Buffer,
   },
   agreedToTerms: { type: Boolean, default: false }
 });
