@@ -102,7 +102,7 @@ const login = async (req, res) => {
 
 const getAllUsers= async (req, res) => { 
     try {
-      const users = await User.find().select('firstName lastName email address city state zip phone file.filename -_id');
+      const users = await User.find().select('-password -file.data');
       res.json(users);
     } catch (err) {
       res.status(500).json({ message: err.message });
