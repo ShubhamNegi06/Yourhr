@@ -43,7 +43,7 @@ const AboutUsPage = () => {
                   alt="Team Member 1"
                 />
                 <div className="card-body text-center">
-                  <h5 className="card-title">John Doe</h5>
+                  <h5 className="card-title">Shubham Negi</h5>
                   <p className="card-text">CEO & Founder</p>
                 </div>
               </div>
@@ -57,7 +57,7 @@ const AboutUsPage = () => {
                   alt="Team Member 2"
                 />
                 <div className="card-body text-center">
-                  <h5 className="card-title">Jane Smith</h5>
+                  <h5 className="card-title">Anant Naudiyal</h5>
                   <p className="card-text">Chief Marketing Officer</p>
                 </div>
               </div>
