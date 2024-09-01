@@ -14,16 +14,25 @@ const SignupPage = () => {
     state: "",
     zip: "",
     phone: "",
+    role: "",
     file: null,
-    agreedToTerms: false,
+    agreedToTerms: false, 
   });
-  const [error, setError] = useState(null); // Corrected: Now `error` is destructured properly
+  const [error, setError] = useState(null);
 
   const handleChange = (e) => {
     const { id, value, type, checked, files } = e.target;
     setFormData({
       ...formData,
       [id]: type === "checkbox" ? checked : type === "file" ? files[0] : value,
+    });
+  };
+
+  const handleRoleChange = (e) => {
+    const { value } = e.target;
+    setFormData({
+      ...formData,
+      role: value,
     });
   };
 
@@ -56,6 +65,11 @@ const SignupPage = () => {
       return;
     }
 
+    if (!formData.role) {
+      setError("Please select a role.");
+      return;
+    }
+
     const data = new FormData();
     Object.keys(formData).forEach((key) => {
       data.append(key, formData[key]);
@@ -82,7 +96,7 @@ const SignupPage = () => {
   return (
     <div className="container my-5">
       <h2 className="mb-4">Sign Up</h2>
-      {error && <div className="alert alert-danger">{error}</div>} {/* Display error message */}
+      {error && <div className="alert alert-danger">{error}</div>}
       <form className="row g-3" onSubmit={handleSubmit}>
         <div className="col-md-6 col-sm-12">
           <label htmlFor="firstName" className="form-label">
@@ -137,6 +151,39 @@ const SignupPage = () => {
             Phone Number
           </label>
           <input type="tel" className="form-control" id="phone" required onChange={handleChange} />
+        </div>
+        <div className="col-12">
+          <fieldset>
+            <legend style={{ fontSize: '1.1rem' }}>Role</legend>
+            <div className="form-check">
+              <input
+                className="form-check-input"
+                type="radio"
+                id="roleJobSeeker"
+                name="role"
+                value="Job Seeker"
+                checked={formData.role === "Job Seeker"}
+                onChange={handleRoleChange}
+              />
+              <label className="form-check-label" htmlFor="roleJobSeeker">
+                Job Seeker
+              </label>
+            </div>
+            <div className="form-check">
+              <input
+                className="form-check-input"
+                type="radio"
+                id="roleRecruiter"
+                name="role"
+                value="Recruiter"
+                checked={formData.role === "Recruiter"}
+                onChange={handleRoleChange}
+              />
+              <label className="form-check-label" htmlFor="roleRecruiter">
+                Recruiter
+              </label>
+            </div>
+          </fieldset>
         </div>
         <div className="col-12">
           <div className="mb-3">

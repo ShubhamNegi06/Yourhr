@@ -12,6 +12,7 @@ const userSchema = new mongoose.Schema({
   state: { type: String, required: true },
   zip: { type: Number },
   phone: { type: Number, required: true, unique: true },
+  role: { type: String, required: true },
   file: {
     filename: String,
     contentType: String,

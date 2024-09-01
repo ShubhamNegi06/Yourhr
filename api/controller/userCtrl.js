@@ -19,7 +19,7 @@ const createUser = async (req, res) => {
   }
 
   try {
-    const { firstName, lastName, email, password, address, city, state, zip, phone, agreedToTerms } = req.body;
+    const { firstName, lastName, email, password, address, city, state, zip, phone, role, agreedToTerms } = req.body;
 
     console.log('Received Data:', req.body);
     console.log('File Info:', req.file);
@@ -44,6 +44,7 @@ const createUser = async (req, res) => {
       state,
       zip,
       phone,
+      role,
       file: req.file ? {
         filename: req.file.originalname,
         contentType: req.file.mimetype,
@@ -113,3 +114,4 @@ module.exports = {
   login: [loginValidationRules, login],
   getAllUsers
 };
+ 
