@@ -3,15 +3,15 @@ const mongoose = require('mongoose');
 
 // Define the User schema
 const userSchema = new mongoose.Schema({
+  firstName: {String,  required: true},
+  lastName: {String,   required: true},
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   address: { type: String, required: true },
-  address2: { type: String },
   city: { type: String, required: true },
   state: { type: String, required: true },
   zip: { type: Number },
-  phone: { type: Number, required: true },
-  altPhone: { type: String },
+  phone: { type: Number, required: true, unique:  true },
   file: {
     filename: String,
     contentType: String,

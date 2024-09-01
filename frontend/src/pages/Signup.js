@@ -51,9 +51,22 @@ const SignupPage = () => {
   };
 
   return (
+    
     <div className="container my-5">
       <h2 className="mb-4">Sign Up</h2>
       <form className="row g-3" onSubmit={handleSubmit}>
+      <div className="col-md-6 col-sm-12">
+          <label htmlFor="First Name" className="form-label">
+            First Name
+          </label>
+          <input className="form-control" id="email" required onChange={handleChange} />
+        </div>
+        <div className="col-md-6 col-sm-12">
+          <label htmlFor="Last Name" className="form-label">
+            Last Name
+          </label>
+          <input className="form-control" id="email" required onChange={handleChange} />
+        </div>
         <div className="col-md-6 col-sm-12">
           <label htmlFor="email" className="form-label">
             Email
@@ -71,12 +84,6 @@ const SignupPage = () => {
             Address
           </label>
           <input type="text" className="form-control" id="address" placeholder="1234 Main St" required onChange={handleChange} />
-        </div>
-        <div className="col-12">
-          <label htmlFor="address2" className="form-label">
-            Address 2
-          </label>
-          <input type="text" className="form-control" id="address2" placeholder="Apartment, studio, or floor" onChange={handleChange} />
         </div>
         <div className="col-md-6 col-sm-12">
           <label htmlFor="city" className="form-label">
@@ -101,12 +108,6 @@ const SignupPage = () => {
             Phone Number
           </label>
           <input type="tel" className="form-control" id="phone" required onChange={handleChange} />
-        </div>
-        <div className="col-md-6 col-sm-12">
-          <label htmlFor="altPhone" className="form-label">
-            Alternate Phone Number
-          </label>
-          <input type="tel" className="form-control" id="altPhone" onChange={handleChange} />
         </div>
         <div className="col-12">
           <div className="mb-3">

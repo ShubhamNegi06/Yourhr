@@ -38,15 +38,15 @@ router.post(
 
       // Create a new user instance
       const newUser = new User({
+        firstName,
+        lastName,
         email,
         password: hashedPassword,
         address,
-        address2,
         city,
         state,
         zip,
         phone,
-        altPhone,
         file: req.file ? {
           filename: req.file.originalname,
           contentType: req.file.mimetype,
