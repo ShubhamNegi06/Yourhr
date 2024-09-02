@@ -108,10 +108,30 @@ const getAllUsers= async (req, res) => {
     } catch (err) {
       res.status(500).json({ message: err.message });
     }
-  };
+};
+
+const getaUser = async (req, res) => {
+  const email = req.params.email.trim(); // Trim the email to remove leading/trailing spaces
+  console.log('Email received:', email); // Log the email for debugging
+
+  try {
+    const user = await User.findOne({ email }).select('-password'); // Query the database
+    console.log('User found:', user); // Log the user result for debugging
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' }); // Handle case where user is not found
+    }
+
+    res.json(user);
+  } catch (err) {
+    console.error('Server Error:', err); // Log the error for debugging
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
 module.exports = {
   createUser: [upload.single('file'), userValidationRules, createUser],
   login: [loginValidationRules, login],
-  getAllUsers
+  getAllUsers, getaUser
 };
  
