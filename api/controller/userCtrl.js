@@ -129,9 +129,28 @@ const getaUser = async (req, res) => {
   }
 };
 
+const details= async (req, res) => {
+  const { email } = req.query;
+  if (!email) {
+    return res.status(400).json({ message: 'Email is required' });
+  }
+
+  try {
+    // Fetch user from database
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+
 module.exports = {
   createUser: [upload.single('file'), userValidationRules, createUser],
   login: [loginValidationRules, login],
-  getAllUsers, getaUser
+  getAllUsers, getaUser, details
 };
  
