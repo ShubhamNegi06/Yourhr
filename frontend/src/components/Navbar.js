@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../components/AuthContext';
+import { FaUserCircle } from 'react-icons/fa'; // Importing a user icon from FontAwesome
 
 const linkStyle = {
   color: 'white',
@@ -49,14 +50,19 @@ const Navbar = () => {
               <Link to="/contactus" style={linkStyle}>Contact Us</Link>
             </li>
           </ul>
-          <div className="d-flex ms-3">
+          <div className="d-flex ms-3 align-items-center">
             {isLoggedIn ? (
-              <button
-                className="btn btn-outline-light ms-2"
-                onClick={handleLogoutClick}
-              >
-                Logout
-              </button>
+              <>
+                <Link to="/profile" style={linkStyle}>
+                  <FaUserCircle size={30} color="white" /> {/* Profile icon */}
+                </Link>
+                <button
+                  className="btn btn-outline-light ms-2"
+                  onClick={handleLogoutClick}
+                >
+                  Logout
+                </button>
+              </>
             ) : (
               <>
                 <Link to="/login">

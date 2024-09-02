@@ -13,6 +13,7 @@ import  AboutUs from './pages/AboutUs';
 import ThankYou from './pages/ThankYou';
 import ApplyNow from './pages/ApplyNow';
 import JobSearch from './pages/JobSearch';
+import Profile from './pages/Profile';
 
 const Applayout =  () => {
   return (
@@ -35,6 +36,7 @@ const Approuter = createBrowserRouter([
     {path: "/ThankYou",   element: <ThankYou />},
     {path: "/applynow", element: <ApplyNow />},
     {path: "/jobsearch", element: <JobSearch />},
+    {path: "/profile", element: <Profile />},
 ]},
 ]);
 const root = ReactDOM.createRoot(document.getElementById('root'));

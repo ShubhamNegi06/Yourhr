@@ -24,16 +24,6 @@ const JobSearch = () => {
             className="form-control mb-2"
             placeholder="Search by job title"
           />
-          <input
-            type="text"
-            className="form-control mb-2"
-            placeholder="Filter by company"
-          />
-          <input
-            type="text"
-            className="form-control mb-2"
-            placeholder="Filter by location"
-          />
         </div>
       </div>
       <div className="row">
